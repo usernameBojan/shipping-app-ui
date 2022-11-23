@@ -1,0 +1,12 @@
+.wrapper {
+    margin: 7.5% auto;
+   
+    /* justify-content: center;
+    align-items: space-around; */
+}
+
+div div {
+    padding: 5px;
+    margin: auto;
+    width: 44%;
+}

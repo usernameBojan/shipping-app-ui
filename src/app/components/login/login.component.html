@@ -1,0 +1,12 @@
+<div class="container">
+  <form (submit)="login(logIn)">
+    <div class="input-group">
+      <span class="input-group-text">Enter your username and password</span>
+      <input [(ngModel)]="logIn.username" placeholder="Username" [ngModelOptions]="{standalone: true}" 
+      type="text" aria-label="First name" placeholder="Username" class="form-control">
+      <input [(ngModel)]="logIn.password" placeholder="Password" type="password" [ngModelOptions]="{standalone: true}" 
+      type="text" aria-label="Last name" placeholder="Password" type="password" class="form-control">
+      <button class="btn btn-outline-secondary" type="submit" id="button-addon1">Button</button>
+    </div>
+  </form>
+</div>

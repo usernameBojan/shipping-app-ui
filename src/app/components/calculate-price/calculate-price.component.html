@@ -1,0 +1,45 @@
+<div class="container" *ngIf="!isSuccess">
+    <h4 class="text-center my-4">Calculate price for package</h4>
+    <div class="container my-4" *ngIf="isError">
+        <div class="alert alert-danger text-center" role="alert">
+            Invalid inputs. Please try again.
+        </div>      
+    </div>
+    <form #form="ngForm" (ngSubmit)="calculatePrice()">
+        <div class="inputs-container">
+            
+            <div class="mb-3">
+                <label for="weight" class="form-label">Weight</label>
+                <input type="text" class="form-control" id="weight"
+                name="weight" [(ngModel)] = "inquiryReq.weight">
+            </div>
+            <div class="mb-3">
+                <label for="width" class="form-label">Width</label>
+                <input type="text" class="form-control" id="width"
+                name="width" [(ngModel)] = "inquiryReq.width">
+            </div>
+            <div class="mb-3">
+                <label for="height" class="form-label">Height</label>
+                <input type="text" class="form-control" id="height"
+                name="height" [(ngModel)] = "inquiryReq.height">
+            </div>
+            <div class="mb-3">
+                <label for="length" class="form-label">Length</label>
+                <input type="text" class="form-control" id="length"
+                name="length" [(ngModel)] = "inquiryReq.length">
+            </div>
+        </div>
+        <div class="container text-center">
+            <button type="submit" class="btn btn-primary container">Calculate Price</button>
+        </div>
+    </form>
+</div>
+
+<div class="container my-4" *ngIf="isSuccess">
+    <div class="alert alert-success text-center" role="alert">
+        Price for the package of provided dimensions is <strong>{{inqury.price.toString().substr(0, 5)}}$</strong>
+        <div class="container my-3">
+            <a  [routerLink]="['order', inqury.inquiryId]" type="button" class="btn btn-success">Order Shipping now!</a>
+        </div>
+    </div>      
+</div>

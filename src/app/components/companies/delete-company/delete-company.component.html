@@ -1,0 +1,16 @@
+<div class="container" *ngIf="isSuccess">
+    <div class="alert alert-success text-center" role="alert">
+        <h5>Company Deleted</h5>
+        <p><a routerLink="./../../../../admin" class="alert-link">Go back to Dashboard</a></p>
+        <p><a routerLink="./../../../../admin/companies" class="alert-link">Go back Companies managment</a></p>
+    </div>
+</div>
+
+<div class="container" *ngIf="!isSuccess && !isError">
+    <div class="alert alert-danger text-center my-4" role="alert">
+        <strong>You are about to delete this company!</strong>
+        <p>Are you sure you want to proceed?</p>
+        <button class="btn btn-success" (click)="deleteCompany()">Confirm</button>
+        <button class="btn btn-warning" (click)="goBack()">Go back</button>
+    </div>      
+</div>

@@ -1,0 +1,49 @@
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title text-center mb-5">{{ company.name }}</h5>
+        <div class="data-wrapper">
+            <div>
+                <h6 class="card-subtitle mb-2 text-muted">Parcel Limitations</h6>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Minimum volume for parcel: {{company.parcelLimitations.minVolume}}cm3</li>
+                    <li class="list-group-item" *ngIf="company.parcelLimitations.maxVolume !== 0; else volumeElseBlock">Maximum volume for parcel: {{company.parcelLimitations.maxVolume}}cm3</li>
+                    <ng-template #volumeElseBlock>
+                        <li class="list-group-item">No limit on maximum volume</li>
+                    </ng-template>
+                    <li class="list-group-item">Minimum weight for parcel: {{company.parcelLimitations.minWeight}}kg</li>
+                    <li class="list-group-item" *ngIf="company.parcelLimitations.maxWeight !== 0; else weightElseBlock">Maximum weight for parcel: {{company.parcelLimitations.maxWeight}}Kg</li>
+                    <ng-template #weightElseBlock>
+                        <li class="list-group-item">No limit on maximum weight</li>
+                    </ng-template>
+                </ul>
+            </div>
+            <div>
+                <h6 class="card-subtitle mb-2 text-muted">Weight Price Ranges</h6>
+                <ul class="list-group list-group-flush" *ngFor="let range of company.parcelWeightRange">
+                    <li class="list-group-item" *ngIf="range.maxWeight !==0 && range.incrementalPriceStartingPoint === 0">
+                        {{range.price}}$ for packages between {{range.minWeight}}Kg and {{range.maxWeight}}Kg
+                    </li>
+                    <li class="list-group-item" *ngIf="range.maxWeight !== 0 && range.incrementalPriceStartingPoint !== 0">
+                        {{range.price}}$ for packages over {{range.minWeight}}Kg and {{range.incrementalPriceValue}}$ for every kilogram above {{range.incrementalPriceStartingPoint}}
+                    </li>
+                    <li class="list-group-item" *ngIf="range.maxWeight ===0 && range.incrementalPriceStartingPoint !== 0">
+                        {{range.price}}$ for packages over {{range.minWeight}}Kg and {{range.incrementalPriceValue}}$ for every kilogram above {{range.incrementalPriceStartingPoint}}
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h6 class="card-subtitle mb-2 text-muted">Volume Price Ranges</h6>
+                <ul class="list-group list-group-flush" *ngFor="let range of company.parcelVolumeRange">
+                    <li class="list-group-item" *ngIf="range.maxVolume !==0; else volumeRangeElseBlock">
+                        {{range.price}}$ for packages between {{range.minVolume}}Kg and {{range.maxVolume}}Kg
+                    </li>
+                    <ng-template #volumeRangeElseBlock>
+                        <li class="list-group-item">
+                            {{range.price}}$ for packages over {{range.maxVolume}}Kg
+                        </li>
+                    </ng-template>
+                </ul>
+            </div>           
+        </div>
+    </div>
+</div>

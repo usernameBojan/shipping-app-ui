@@ -1,0 +1,9 @@
+div{
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    margin: 10px auto 55px;
+    text-decoration: none;
+}

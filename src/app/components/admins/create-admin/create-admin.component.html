@@ -1,0 +1,47 @@
+<div class="container" *ngIf="!isSuccess">
+    <h4 class="text-center my-4">Create New Admin</h4>
+    <div class="container my-4" *ngIf="isError">
+        <div class="alert alert-danger text-center" role="alert">
+            Error: {{errMsg}}
+        </div>      
+    </div>
+    <form #form="ngForm" (ngSubmit)="createAdminRequest()">
+        <div class="inputs-container">
+            <div class="mb-3">
+                <label for="fullName" class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="fullName" 
+                name="fullName" [(ngModel)] = "createAdmin.fullName">
+            </div>
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username"
+                name="username" [(ngModel)] = "createAdmin.username">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password"
+                name="password" [(ngModel)] = "createAdmin.password">
+            </div>
+            <div id="passwordHelpBlock" class="form-text">
+                Password must contain at least one uppercase letter, one lowercase letter, one number and can't be
+                shorter than 8 characters.
+            </div>
+            <div class="mb-3 my-3 form-check">
+                <input type="checkbox" class="form-check-input" id="canManageAdmins" 
+                name="canManageAdmins" [(ngModel)] = "createAdmin.canManageAdmins">
+                <label class="form-check-label" for="canManageAdmins">Can Manage Admins</label>
+            </div>
+        </div>
+        <div class="container">
+            <button type="submit" class="btn btn-primary">Create</button>
+        </div>
+    </form>
+</div>
+
+<div class="container my-4" *ngIf="isSuccess">
+    <div class="alert alert-success text-center" role="alert">
+        Admin successfully created.
+        <div><a routerLink="./../../admins" class="alert-link">Return to Admins managment</a></div>
+        <div><a routerLink="./../../../admin" class="alert-link">Return to Dashboard</a></div>
+    </div>      
+</div>

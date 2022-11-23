@@ -1,0 +1,34 @@
+<div class="container">
+    <h4 class="mb-4 my-4 text-center">
+        Inquiry Statistics
+    </h4>      
+    <table class="table table-dark table-hover my-3" *ngIf="stats">
+        <thead>
+            <tr>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Weight</th>
+                <th scope="col">Volume</th>
+                <th scope="col">Pick up address</th>
+                <th scope="col">Shipping address</th>
+                <th scope="col">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let stat of stats">
+                <td>{{ stat.customerName }}</td>
+                <td>{{ stat.customerLastName }}</td>
+                <td>{{ stat.email }}</td>
+                <th>{{ stat.weight }}Kg</th>
+                <td>{{ stat.volume }}cm3</td>
+                <td>{{ stat.pickupAddress }}cm3</td>
+                <td>{{ stat.shippingAddress }}</td>
+                <td>{{ stat.price }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="alert alert-warning" role="alert" *ngIf="!stats">
+        <h3 class="text-center">There are no orders yet.</h3>
+    </div>
+</div>

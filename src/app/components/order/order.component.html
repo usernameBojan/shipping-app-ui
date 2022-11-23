@@ -1,0 +1,70 @@
+<div class="container" *ngIf="!isSuccess">
+    <h4 class="text-center my-4">Order Shipping</h4>
+    <div class="container my-4" *ngIf="isError">
+        <div class="alert alert-danger text-center" role="alert">
+            Invalid inputs. Please try again.
+        </div>      
+    </div>
+    <form #form="ngForm" (ngSubmit)="createOrder()">
+        <div class="inputs-container">
+            <div class="mb-3">
+                <label for="firstName" class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="firstName" 
+                name="firstName" [(ngModel)] = "order.customerName">
+            </div>
+            <div class="mb-3">
+                <label for="lastName" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="lastName"
+                name="lastName" [(ngModel)] = "order.customerLastName">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email"
+                name="email" [(ngModel)] = "order.email">
+            </div>
+            <div class="mb-3">
+                <label for="pickupAddress" class="form-label">Pickup Address</label>
+                <input type="text" class="form-control" id="pickupAddress" 
+                name="pickupAddress" [(ngModel)] = "order.pickupAddress">
+            </div>
+            <div class="mb-3">
+                <label for="shippingAddress" class="form-label">Shipping Address</label>
+                <input type="text" class="form-control" id="lastName"
+                name="shippingAddress" [(ngModel)] = "order.shippingAddress">
+            </div>
+            <div class="mb-3">
+                <label for="weight" class="form-label">Weight</label>
+                <input type="text" class="form-control" id="weight"
+                name="weight" [(ngModel)] = "order.weight">
+            </div>
+            <div class="mb-3">
+                <label for="width" class="form-label">Width</label>
+                <input type="text" class="form-control" id="width"
+                name="width" [(ngModel)] = "order.width">
+            </div>
+            <div class="mb-3">
+                <label for="height" class="form-label">Height</label>
+                <input type="text" class="form-control" id="height"
+                name="height" [(ngModel)] = "order.height">
+            </div>
+            <div class="mb-3">
+                <label for="length" class="form-label">Length</label>
+                <input type="text" class="form-control" id="length"
+                name="length" [(ngModel)] = "order.length">
+            </div>
+            <div class="mb-3" *ngIf="order.price !== 0">
+                <label for="price" class="form-label">Price</label>
+                <input type="text" class="form-control" id="price"
+                name="price" [(ngModel)] = "order.price" readonly disabled>
+            </div>
+        </div>
+        <div class="container text-center">
+            <button type="submit container" class="btn btn-primary">Order</button>
+        </div>
+    </form>
+</div>
+<div class="container my-4" *ngIf="isSuccess">
+    <div class="alert alert-success text-center" role="alert">
+        Order registered successfully.
+    </div>      
+</div>
