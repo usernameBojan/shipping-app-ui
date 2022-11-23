@@ -3,43 +3,33 @@
     <div class="container my-4" *ngIf="isError">
         <div class="alert alert-danger text-center" role="alert">
             Invalid inputs. Please try again.
-        </div>      
+        </div>
     </div>
     <form #form="ngForm" (ngSubmit)="calculatePrice()">
-        <div class="inputs-container">
-            
-            <div class="mb-3">
-                <label for="weight" class="form-label">Weight</label>
-                <input type="text" class="form-control" id="weight"
-                name="weight" [(ngModel)] = "inquiryReq.weight">
-            </div>
-            <div class="mb-3">
-                <label for="width" class="form-label">Width</label>
-                <input type="text" class="form-control" id="width"
-                name="width" [(ngModel)] = "inquiryReq.width">
-            </div>
-            <div class="mb-3">
-                <label for="height" class="form-label">Height</label>
-                <input type="text" class="form-control" id="height"
-                name="height" [(ngModel)] = "inquiryReq.height">
-            </div>
-            <div class="mb-3">
-                <label for="length" class="form-label">Length</label>
-                <input type="text" class="form-control" id="length"
-                name="length" [(ngModel)] = "inquiryReq.length">
-            </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Enter Weight</span>
+            <input type="text" class="form-control" id="weight" name="weight" [(ngModel)]="inquiryReq.weight">
         </div>
-        <div class="container text-center">
-            <button type="submit" class="btn btn-primary container">Calculate Price</button>
+        <div class="input-group">
+            <span class="input-group-text">Enter package volume values(width, height, length)</span>
+            <input type="text" class="form-control" id="width" name="width" [(ngModel)]="inquiryReq.width">
+            <input type="text" class="form-control" id="height" name="height" [(ngModel)]="inquiryReq.height">
+            <input type="text" class="form-control" id="length" name="length" [(ngModel)]="inquiryReq.length">
+        </div>
+
+        <div class="my-4 text-center">
+            <button type="submit" class="btn btn-primary">Calculate Price</button>
         </div>
     </form>
 </div>
-
 <div class="container my-4" *ngIf="isSuccess">
     <div class="alert alert-success text-center" role="alert">
         Price for the package of provided dimensions is <strong>{{inqury.price.toString().substr(0, 5)}}$</strong>
         <div class="container my-3">
-            <a  [routerLink]="['order', inqury.inquiryId]" type="button" class="btn btn-success">Order Shipping now!</a>
+            <a [routerLink]="['order', inqury.inquiryId]" type="button" class="btn btn-success">Order Shipping now!</a>
         </div>
-    </div>      
+        <div class="container my3">
+            <button type="button" class="btn btn-primary" (click)="reload()">Calculate again</button>
+        </div>
+    </div>
 </div>

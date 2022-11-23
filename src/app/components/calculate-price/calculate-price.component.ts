@@ -30,4 +30,10 @@ export class CalculatePriceComponent {
       }
     })
   }
+
+  reload(): void {
+    this.isSuccess = false;
+    this.isError = false;
+    this.inquiryReq = new InquiryRequest();
+  }
 }

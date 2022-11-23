@@ -35,11 +35,11 @@
                 <h6 class="card-subtitle mb-2 text-muted">Volume Price Ranges</h6>
                 <ul class="list-group list-group-flush" *ngFor="let range of company.parcelVolumeRange">
                     <li class="list-group-item" *ngIf="range.maxVolume !==0; else volumeRangeElseBlock">
-                        {{range.price}}$ for packages between {{range.minVolume}}Kg and {{range.maxVolume}}Kg
+                        {{range.price}}$ for packages between {{range.minVolume}}cm3 and {{range.maxVolume}}cm3
                     </li>
                     <ng-template #volumeRangeElseBlock>
                         <li class="list-group-item">
-                            {{range.price}}$ for packages over {{range.maxVolume}}Kg
+                            {{range.price}}$ for packages over {{range.maxVolume}}cm3
                         </li>
                     </ng-template>
                 </ul>
