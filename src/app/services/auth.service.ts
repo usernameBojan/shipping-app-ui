@@ -28,7 +28,7 @@ export class AuthService {
       payload = JSON.parse(window.atob(token.split(".")[1]));
       exp = parseInt(payload.exp) * 1000;
 
-      return currentTime > exp;
+      return currentTime < exp;
     }
 
     return token;
