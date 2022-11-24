@@ -54,10 +54,12 @@
                 </div> 
                 <div class="input-group" *ngFor="let range of volumeRanges"> 
                     <span class="input-group-text">#</span> 
-                    <input type="text" label="minimum" aria-label="Min volume" class="form-control" placeholder="Minimum Volume for Range" [(ngModel)]="range.minVolume" [ngModelOptions]="{standalone: true}">
-                    <input type="text" aria-label="Max volume" class="form-control" placeholder="Maximum Volume for Range" [(ngModel)]="range.maxVolume" [ngModelOptions]="{standalone: true}">
-                    <input type="text" aria-label="Price volume" class="form-control" placeholder="Price" [(ngModel)]="range.price" [ngModelOptions]="{standalone: true}">
-                    <button class="btn btn-outline-primary" type="button" id="button-addon1" (click)="handleAddVolumeRange()">Add</button>
+                    <input type="text" label="minimum" aria-label="Min volume" class="form-control" placeholder="Minimum Volume for Range" 
+                    [(ngModel)]="range.minVolume" [ngModelOptions]="{standalone: true}" (change)="handleAddVolumeRange()">
+                    <input type="text" aria-label="Max volume" class="form-control" placeholder="Maximum Volume for Range" 
+                    [(ngModel)]="range.maxVolume" [ngModelOptions]="{standalone: true}" (change)="handleAddVolumeRange()">
+                    <input type="text" aria-label="Price volume" class="form-control" placeholder="Price" 
+                    [(ngModel)]="range.price" [ngModelOptions]="{standalone: true}" (change)="handleAddVolumeRange()">
                   </div>
             </div>
             <div class="input group mb-3">
@@ -81,12 +83,16 @@
 
                 <div class="input-group" *ngFor="let range of weightRanges"> 
                     <span class="input-group-text">#</span> 
-                    <input type="text" aria-label="Min volume" class="form-control" placeholder="Minimum Volume for Range" [(ngModel)]="range.minWeight" [ngModelOptions]="{standalone: true}">
-                    <input type="text" aria-label="Max volume" class="form-control" placeholder="Maximum Volume for Range" [(ngModel)]="range.maxWeight" [ngModelOptions]="{standalone: true}">
-                    <input type="text" aria-label="Min volume" class="form-control" placeholder="Incremental Price Starting Point" [(ngModel)]="range.incrementalPriceStartingPoint" [ngModelOptions]="{standalone: true}">
-                    <input type="text" aria-label="Max volume" class="form-control" placeholder="incremental Price Value" [(ngModel)]="range.incrementalPriceValue" [ngModelOptions]="{standalone: true}">
-                    <input type="text" aria-label="Price volume" class="form-control" placeholder="Price" [(ngModel)]="range.price" [ngModelOptions]="{standalone: true}">
-                    <button class="btn btn-outline-primary" type="button" id="button-addon1" (click)="handleAddWeightRange()">Add</button>
+                    <input type="text" aria-label="Min volume" class="form-control" placeholder="Minimum Volume for Range" 
+                    [(ngModel)]="range.minWeight" [ngModelOptions]="{standalone: true}" (change)="handleAddWeightRange()">
+                    <input type="text" aria-label="Max volume" class="form-control" placeholder="Maximum Volume for Range" 
+                    [(ngModel)]="range.maxWeight" [ngModelOptions]="{standalone: true}" (change)="handleAddWeightRange()">
+                    <input type="text" aria-label="Min volume" class="form-control" placeholder="Incremental Price Starting Point" 
+                    [(ngModel)]="range.incrementalPriceStartingPoint" [ngModelOptions]="{standalone: true}" (change)="handleAddWeightRange()">
+                    <input type="text" aria-label="Max volume" class="form-control" placeholder="incremental Price Value" 
+                    [(ngModel)]="range.incrementalPriceValue" [ngModelOptions]="{standalone: true}" (change)="handleAddWeightRange()">
+                    <input type="text" aria-label="Price volume" class="form-control" placeholder="Price" 
+                    [(ngModel)]="range.price" [ngModelOptions]="{standalone: true}" (change)="handleAddWeightRange()">
                   </div>
             </div>
         </div>
