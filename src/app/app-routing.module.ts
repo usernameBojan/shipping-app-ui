@@ -17,6 +17,7 @@ import { DeleteCompanyComponent } from './components/companies/delete-company/de
 import { AddCompanyComponent } from './components/companies/add-company/add-company.component';
 import { OrderComponent } from './components/order/order.component';
 import { CalculatePriceComponent } from './components/calculate-price/calculate-price.component';
+import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -45,51 +46,63 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    component: AdminComponent
+    component: AdminComponent,
+    canActivate: [AuthGuard] 
   },
   {
     path: 'admin/admins',
-    component: AdminsComponent
+    component: AdminsComponent,
+    canActivate: [AuthGuard] 
   },
   {
     path: 'admin/admins/create',
-    component: CreateAdminComponent
+    component: CreateAdminComponent,
+    canActivate: [AuthGuard] 
   },
   {
     path: 'admin/admins/edit/:id',
-    component: EditAdminComponent
+    component: EditAdminComponent,
+    canActivate: [AuthGuard] 
   },
   {
     path: 'admin/admins/delete/:id',
-    component: DeleteAdminComponent
+    component: DeleteAdminComponent,
+    canActivate: [AuthGuard] 
   },
   {
     path: 'admin/inquiries',
-    component: InquiryStatsComponent
+    component: InquiryStatsComponent,
+    canActivate: [AuthGuard] 
   },
   {
     path: 'admin/orders',
-    component: OrderStatsComponent
+    component: OrderStatsComponent,
+    canActivate: [AuthGuard] 
   },
   {
     path: 'admin/companies',
-    component: CompaniesComponent
+    component: CompaniesComponent,
+    canActivate: [AuthGuard] 
   },
   {
     path: 'admin/companies/add',
-    component: AddCompanyComponent
+    component: AddCompanyComponent,
+    canActivate: [AuthGuard] 
   },
   {
     path: 'admin/companies/details/:name',
-    component: CompanyComponent
+    component: CompanyComponent,
+    canActivate: [AuthGuard] 
   },
   {
     path: 'admin/companies/edit/:name',
-    component: EditCompanyComponent
+    component: EditCompanyComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'admin/companies/delete/:name',
-    component: DeleteCompanyComponent
+    component: DeleteCompanyComponent,
+    canActivate: [AuthGuard] 
   },
 ];
 

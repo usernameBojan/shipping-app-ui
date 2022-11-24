@@ -17,4 +17,20 @@ export class AuthService {
       login, { responseType: 'text'}
      )
   }
+
+  public isAuthenticated(): boolean {
+    const token: any = localStorage.getItem('authToken');
+    let currentTime: number = Date.parse(new Date().toString());
+    let payload: any;
+    let exp: number;
+
+    if (token) {
+      payload = JSON.parse(window.atob(token.split(".")[1]));
+      exp = parseInt(payload.exp) * 1000;
+
+      return currentTime > exp;
+    }
+
+    return token;
+  }
 }
