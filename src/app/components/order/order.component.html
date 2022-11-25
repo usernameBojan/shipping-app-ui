@@ -2,7 +2,7 @@
     <h4 class="text-center my-4">Order Shipping</h4>
     <div class="container my-4" *ngIf="isError">
         <div class="alert alert-danger text-center" role="alert">
-            Invalid inputs. Please try again.
+            {{errMsg}}
         </div>      
     </div>
     <form #form="ngForm" (ngSubmit)="createOrder()">
@@ -29,30 +29,30 @@
             <div class="mb-3" *ngIf="order.price === 0">
                 <div class="input-group mb-3">
                     <span class="input-group-text">Enter Weight</span>
-                    <input type="text" class="form-control" id="weight" name="weight" [(ngModel)]="order.weight" placeholder="Weight">
+                    <input type="number" class="form-control" id="weight" name="weight" [(ngModel)]="order.weight" placeholder="Weight">
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text">Enter package volume values(width, height, length)</span>
-                    <input type="text" class="form-control" id="width" name="width" [(ngModel)]="order.width" placeholder="Width">
-                    <input type="text" class="form-control" id="height" name="height" [(ngModel)]="order.height" placeholder="Height">
-                    <input type="text" class="form-control" id="length" name="length" [(ngModel)]="order.length" placeholder="Length">
+                    <input type="number" class="form-control" id="width" name="width" [(ngModel)]="order.width" placeholder="Width">
+                    <input type="number" class="form-control" id="height" name="height" [(ngModel)]="order.height" placeholder="Height">
+                    <input type="number" class="form-control" id="length" name="length" [(ngModel)]="order.length" placeholder="Length">
                 </div>
             </div>
             
             <div class="mb-3" *ngIf="order.price !== 0">
                 <div class="input-group mb-3">
                     <span class="input-group-text">Weight</span>
-                    <input type="text" class="form-control" id="weight" name="weight" [(ngModel)]="order.weight" readonly disabled>
+                    <input type="number" class="form-control" id="weight" name="weight" [(ngModel)]="order.weight" readonly disabled>
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text">Package volume values(width, height, length)</span>
-                    <input type="text" class="form-control" id="width" name="width" [(ngModel)]="order.width" readonly disabled>
-                    <input type="text" class="form-control" id="height" name="height" [(ngModel)]="order.height" readonly disabled>
-                    <input type="text" class="form-control" id="length" name="length" [(ngModel)]="order.length" readonly disabled>
+                    <input type="number" class="form-control" id="width" name="width" [(ngModel)]="order.width" readonly disabled>
+                    <input type="number" class="form-control" id="height" name="height" [(ngModel)]="order.height" readonly disabled>
+                    <input type="number" class="form-control" id="length" name="length" [(ngModel)]="order.length" readonly disabled>
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text">Price</span>
-                    <input type="text" class="form-control" id="price"
+                    <input type="number" class="form-control" id="price"
                     name="price" [(ngModel)] = "order.price" readonly disabled>
                 </div>
             </div>

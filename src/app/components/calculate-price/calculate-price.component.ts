@@ -15,6 +15,7 @@ export class CalculatePriceComponent {
   isSuccess: boolean = false;
   isError: boolean = false;
   price: any = '';
+  errMsg: string = '';
 
   constructor (private inquryService: OrderService) {}
 
@@ -26,7 +27,11 @@ export class CalculatePriceComponent {
       },
       error: (response) => {
         console.log(response)
-        this.isError = true
+        this.isError = true;
+        if(!response.error.errors){
+          this.errMsg = response.error
+        } else this.errMsg = 'Invalid inputs. Please try again.';
+
       }
     })
   }

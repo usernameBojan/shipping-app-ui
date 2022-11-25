@@ -3,101 +3,124 @@
     <div class="container my-4" *ngIf="isError">
         <div class="alert alert-danger text-center" role="alert">
             {{ errMsg }}
-        </div>      
+        </div>
     </div>
-    <form #form="ngForm" (ngSubmit)="addCompany()">
+    <form #form="ngForm" (ngSubmit)="addCompany()" (keydown.enter)="$event.preventDefault()">
         <div class="inputs-container">
-            <div class="mb-3">
-                <label for="name" class="form-label">Company Name</label>
-                <input type="text" class="form-control" id="name" 
-                name="name" [(ngModel)] = "company.name">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="company-name">Company Name</span>
+                <input type="text" class="form-control" id="name" name="name" [(ngModel)]="companyName">
+                <button class="btn btn-outline-secondary" type="button" id="company-name"
+                    (click)="handleCompanyNameInput()">Insert Company name</button>
             </div>
-            <div class="mb-3">
-                <label for="parcelLimitations-minVolume" class="form-label">Minimum Volume</label>
-                <input type="text" class="form-control" id="parcelLimitations-minVolume"
-                name="parcelLimitations-minVolume" [(ngModel)] = "company.parcelLimitations.minVolume">
-            </div>
-            <div class="mb-3">
-                <label for="parcelLimitations-minVolume" class="form-label">Maximum Volume
-                    <p><small><i>Leave 0 if company doesn't have limit on package volume</i></small></p>
-                </label>
-                <input type="text" class="form-control" id="parcelLimitations-maxVolume" 
-                name="parcelLimitations-maxVolume" [(ngModel)] = "company.parcelLimitations.maxVolume">
-            </div>
-            <div class="mb-3">
-                <label for="parcelLimitations-minWeight" class="form-label">Minimum Weight</label>
-                <input type="text" class="form-control" id="parcelLimitations-minWeight"
-                name="parcelLimitations-minWeight" [(ngModel)] = "company.parcelLimitations.minWeight">
-            </div>
-            <div class="mb-3">
-                <label for="parcelLimitations-maxWeight" class="form-label">Maximum Weight
-                    <p><small><i>Leave 0 if company doesn't have limit on package weight</i></small></p>
-                </label>
-                <input type="text" class="form-control" id="parcelLimitations-maxWeight" 
-                name="parcelLimitations-maxWeight" [(ngModel)] = "company.parcelLimitations.maxWeight">
-            </div>
-            <div class="input group mb-3">
-                <label for="parcelLimitations-maxWeight" class="form-label">Enter number of volume ranges and price pairs</label>
+            <div class="mb-3" *ngIf="company.name">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" [(ngModel)] = "volumeRangePairs" [ngModelOptions]="{standalone: true}">
-                    <button class="btn btn-outline-secondary" type="button" (click)="handleVolumeRangePairsNumberInput()">Insert</button>
-                  </div>
-            </div>
-            <div class="mb-3" *ngIf="volumeRanges.length > 0">
-                <label>Add volume ranges and price one by one</label>
+                    <span for="parcelLimitations-minVolume" class="input-group-text">Minimum Volume</span>
+                    <input type="number" class="form-control" id="parcelLimitations-minVolume"
+                        name="parcelLimitations-minVolume" [(ngModel)]="limitations.minVolume">
+                </div>
                 <p><small><i>Leave 0 if company doesn't have limit on package volume</i></small></p>
-                <div class="input-group">
-                    <span class="input-group-text">#</span> 
-                    <input type="text" aria-label="Min volume" class="form-control" placeholder="Min" readonly disabled>
-                    <input type="text" aria-label="Max volume" class="form-control" placeholder="Max" readonly disabled>
-                    <input type="text" aria-label="Price volume" class="form-control" placeholder="Price" readonly disabled>
-                </div> 
-                <div class="input-group" *ngFor="let range of volumeRanges"> 
-                    <span class="input-group-text">#</span> 
-                    <input type="text" label="minimum" aria-label="Min volume" class="form-control" placeholder="Minimum Volume for Range" 
-                    [(ngModel)]="range.minVolume" [ngModelOptions]="{standalone: true}" (change)="handleAddVolumeRange()">
-                    <input type="text" aria-label="Max volume" class="form-control" placeholder="Maximum Volume for Range" 
-                    [(ngModel)]="range.maxVolume" [ngModelOptions]="{standalone: true}" (change)="handleAddVolumeRange()">
-                    <input type="text" aria-label="Price volume" class="form-control" placeholder="Price" 
-                    [(ngModel)]="range.price" [ngModelOptions]="{standalone: true}" (change)="handleAddVolumeRange()">
-                  </div>
-            </div>
-            <div class="input group mb-3">
-                <label for="parcelLimitations-maxWeight" class="form-label">Enter number of weight ranges and price pairs</label>
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" [(ngModel)] = "weightRangePairs" [ngModelOptions]="{standalone: true}">
-                    <button class="btn btn-outline-secondary" type="button" (click)="handleWeightRangePairsNumberInput()">Insert</button>
-                  </div>
+                    <span for="parcelLimitations-minVolume" class="input-group-text">Maximum Volume</span>
+                    <input type="number" class="form-control" id="parcelLimitations-maxVolume"
+                        name="parcelLimitations-maxVolume" [(ngModel)]="limitations.maxVolume">
+                </div>
+                <div class="input-group mb-3">
+                    <span for="parcelLimitations-minWeight" class="input-group-text">Minimum Weight</span>
+                    <input type="number" class="form-control" id="parcelLimitations-minWeight"
+                        name="parcelLimitations-minWeight" [(ngModel)]="limitations.minWeight">
+                </div>
+                <p><small><i>Leave 0 if company doesn't have limit on package weight</i></small></p>
+                <div class="input-group mb-3">
+                    <span for="parcelLimitations-maxWeight" class="input-group-text">Maximum Weight</span>
+                    <input type="number" class="form-control" id="parcelLimitations-maxWeight"
+                        name="parcelLimitations-maxWeight" [(ngModel)]="limitations.maxWeight">
+                </div>
+                <div class="container text-center">
+                    <button type="button" class=" btn btn-outline-secondary" (click)="handleParcelLimitations()"
+                    [disabled]="(limitations.minVolume === 0 && limitations.maxVolume === 0) 
+                    || (limitations.minWeight === 0 && limitations.maxWeight === 0)">
+                    Insert Parcel Limitations
+                </button>
+                </div>
             </div>
-            <div class="mb-3" *ngIf="weightRanges.length > 0">
-                <label>Add weight ranges and price one by one</label>
-                <p><small><i>Leave 0 if company doesn't have limit on package volume or doesn't have incremental price</i></small></p>
-                <div class="input-group">
-                    <span class="input-group-text">#</span> 
-                    <input type="text" aria-label="Min volume" class="form-control" placeholder="Min" readonly disabled>
-                    <input type="text" aria-label="Max volume" class="form-control" placeholder="Max" readonly disabled>
-                    <input type="text" aria-label="Min volume" class="form-control" placeholder="Inc starting" readonly disabled>
-                    <input type="text" aria-label="Max volume" class="form-control" placeholder="Inc value" readonly disabled>
-                    <input type="text" aria-label="Price volume" class="form-control" placeholder="Price" readonly disabled>
-                </div> 
-
-                <div class="input-group" *ngFor="let range of weightRanges"> 
-                    <span class="input-group-text">#</span> 
-                    <input type="text" aria-label="Min volume" class="form-control" placeholder="Minimum Volume for Range" 
-                    [(ngModel)]="range.minWeight" [ngModelOptions]="{standalone: true}" (change)="handleAddWeightRange()">
-                    <input type="text" aria-label="Max volume" class="form-control" placeholder="Maximum Volume for Range" 
-                    [(ngModel)]="range.maxWeight" [ngModelOptions]="{standalone: true}" (change)="handleAddWeightRange()">
-                    <input type="text" aria-label="Min volume" class="form-control" placeholder="Incremental Price Starting Point" 
-                    [(ngModel)]="range.incrementalPriceStartingPoint" [ngModelOptions]="{standalone: true}" (change)="handleAddWeightRange()">
-                    <input type="text" aria-label="Max volume" class="form-control" placeholder="incremental Price Value" 
-                    [(ngModel)]="range.incrementalPriceValue" [ngModelOptions]="{standalone: true}" (change)="handleAddWeightRange()">
-                    <input type="text" aria-label="Price volume" class="form-control" placeholder="Price" 
-                    [(ngModel)]="range.price" [ngModelOptions]="{standalone: true}" (change)="handleAddWeightRange()">
-                  </div>
+            <div class="input group mb-3" *ngIf="parcelLimitationsAdded">
+                <label for="volumeRangePairs" class="form-label">Enter number of volume ranges and price pairs</label>
+                <div class="input-group mb-3">
+                    <input type="number" class="form-control" [(ngModel)]="volumeRangePairs"
+                        [ngModelOptions]="{standalone: true}">
+                    <button class="btn btn-outline-secondary" type="button"
+                        (click)="handleVolumeRangePairsNumberInput()">Insert</button>
+                </div>
+                <div class="mb-3" *ngIf="volumeRanges.length > 0">
+                    <label>Add volume ranges and price</label>
+                    <p><small><i>Leave 0 if company doesn't have limit on package volume</i></small></p>
+                    <div class="input-group">
+                        <span class="input-group-text">#</span>
+                        <input type="number" aria-label="Min volume" class="form-control" placeholder="Min" readonly disabled>
+                        <input type="number" aria-label="Max volume" class="form-control" placeholder="Max" readonly disabled>
+                        <input type="number" aria-label="Price volume" class="form-control" placeholder="Price" readonly disabled>
+                    </div>
+                    <div class="input-group" *ngFor="let range of volumeRanges">
+                        <span class="input-group-text">#</span>
+                        <input type="number" label="minimum" aria-label="Min volume" class="form-control"
+                            placeholder="Minimum Volume for Range" [(ngModel)]="range.minVolume"
+                            [ngModelOptions]="{standalone: true}" (change)="handleAddVolumeRange()">
+                        <input type="number" aria-label="Max volume" class="form-control"
+                            placeholder="Maximum Volume for Range" [(ngModel)]="range.maxVolume"
+                            [ngModelOptions]="{standalone: true}" (change)="handleAddVolumeRange()">
+                        <input type="number" aria-label="Price volume" class="form-control" placeholder="Price"
+                            [(ngModel)]="range.price" [ngModelOptions]="{standalone: true}"
+                            (change)="handleAddVolumeRange()">
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="parcelLimitationsAdded">
+                <div class="input group mb-3">
+                    <label for="parcelLimitations-maxWeight" class="form-label">Enter number of weight ranges and price pairs</label>
+                    <div class="input-group mb-3">
+                        <input type="number" class="form-control" [(ngModel)]="weightRangePairs"
+                            [ngModelOptions]="{standalone: true}">
+                        <button class="btn btn-outline-secondary" type="button"
+                            (click)="handleWeightRangePairsNumberInput()">Insert</button>
+                    </div>
+                </div>
+                <div class="mb-3" *ngIf="weightRanges.length > 0">
+                    <label>Add weight ranges and price</label>
+                    <p><small><i>Leave 0 if company doesn't have limit on package volume or doesn't have incremental
+                                price</i></small></p>
+                    <div class="input-group">
+                        <span class="input-group-text">#</span>
+                        <input type="number" aria-label="Min volume" class="form-control" placeholder="Min" readonly disabled>
+                        <input type="number" aria-label="Max volume" class="form-control" placeholder="Max" readonly disabled>
+                        <input type="number" aria-label="Min volume" class="form-control" placeholder="Inc starting" readonly disabled>
+                        <input type="number" aria-label="Max volume" class="form-control" placeholder="Inc value" readonly disabled>
+                        <input type="number" aria-label="Price volume" class="form-control" placeholder="Price" readonly disabled>
+                    </div>
+    
+                    <div class="input-group" *ngFor="let range of weightRanges">
+                        <span class="input-group-text">#</span>
+                        <input type="text" aria-label="Min volume" class="form-control"
+                            placeholder="Minimum Volume for Range" [(ngModel)]="range.minWeight"
+                            [ngModelOptions]="{standalone: true}" (change)="handleAddWeightRange()">
+                        <input type="text" aria-label="Max volume" class="form-control"
+                            placeholder="Maximum Volume for Range" [(ngModel)]="range.maxWeight"
+                            [ngModelOptions]="{standalone: true}" (change)="handleAddWeightRange()">
+                        <input type="text" aria-label="Min volume" class="form-control"
+                            placeholder="Incremental Price Starting Point" [(ngModel)]="range.incrementalPriceStartingPoint"
+                            [ngModelOptions]="{standalone: true}" (change)="handleAddWeightRange()">
+                        <input type="text" aria-label="Max volume" class="form-control"
+                            placeholder="incremental Price Value" [(ngModel)]="range.incrementalPriceValue"
+                            [ngModelOptions]="{standalone: true}" (change)="handleAddWeightRange()">
+                        <input type="text" aria-label="Price volume" class="form-control" placeholder="Price"
+                            [(ngModel)]="range.price" [ngModelOptions]="{standalone: true}"
+                            (change)="handleAddWeightRange()">
+                    </div>
+                </div>
             </div>
         </div>
         <div class="container">
-            <button type="submit" class="btn btn-primary container">Add Company</button>
+            <button type="submit" class="btn btn-primary container" [disabled]="!parcelLimitationsAdded">Add Company</button>
         </div>
     </form>
 </div>
@@ -107,5 +130,6 @@
         Partner company successfully added.
         <div><a routerLink="./../../companies" class="alert-link">Return to Companies managment</a></div>
         <div><a routerLink="./../../../admin" class="alert-link">Return to Dashboard</a></div>
-    </div>      
+    </div>
 </div>
+

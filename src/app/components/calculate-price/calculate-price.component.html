@@ -2,19 +2,19 @@
     <h4 class="text-center my-4">Calculate price for package</h4>
     <div class="container my-4" *ngIf="isError">
         <div class="alert alert-danger text-center" role="alert">
-            Invalid inputs. Please try again.
+            {{errMsg}}
         </div>
     </div>
     <form #form="ngForm" (ngSubmit)="calculatePrice()">
         <div class="input-group mb-3">
             <span class="input-group-text">Enter Weight</span>
-            <input type="text" class="form-control" id="weight" name="weight" [(ngModel)]="inquiryReq.weight">
+            <input type="number" class="form-control" id="weight" name="weight" [(ngModel)]="inquiryReq.weight">
         </div>
         <div class="input-group">
             <span class="input-group-text">Enter package volume values(width, height, length)</span>
-            <input type="text" class="form-control" id="width" name="width" [(ngModel)]="inquiryReq.width">
-            <input type="text" class="form-control" id="height" name="height" [(ngModel)]="inquiryReq.height">
-            <input type="text" class="form-control" id="length" name="length" [(ngModel)]="inquiryReq.length">
+            <input type="number" class="form-control" id="width" name="width" [(ngModel)]="inquiryReq.width">
+            <input type="number" class="form-control" id="height" name="height" [(ngModel)]="inquiryReq.height">
+            <input type="number" class="form-control" id="length" name="length" [(ngModel)]="inquiryReq.length">
         </div>
 
         <div class="my-4 text-center">

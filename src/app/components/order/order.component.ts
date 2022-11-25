@@ -14,6 +14,7 @@ export class OrderComponent implements OnInit {
   order: CreateOrder = new CreateOrder();
   isSuccess: boolean = false;
   isError: boolean = false;
+  errMsg: string = '';
 
   constructor (private orderService: OrderService, private statsService: StatisticsService, private route: ActivatedRoute) {}
 
@@ -24,7 +25,6 @@ export class OrderComponent implements OnInit {
         if (id) {
           this.statsService.getInquiry(id).subscribe({
             next: (response) => {
-              console.log(id);
               this.order.weight = response.weight,
               this.order.width = response.width,
               this.order.height = response.height,
@@ -43,7 +43,10 @@ export class OrderComponent implements OnInit {
       next: () => this.isSuccess = true,
       error: (response) => {
         console.log(response)
-        this.isError = true
+        this.isError = true;
+        if(!response.error.errors){
+          this.errMsg = response.error
+        } else this.errMsg = 'Invalid inputs. Please try again.';
       }
     })
   }
